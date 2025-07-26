@@ -5,14 +5,19 @@ import (
 	"net/http"
 	"os"
 	"welp/internal/api"
+	"welp/internal/api/db"
 	"welp/internal/frontend"
+
+	"gorm.io/gorm"
 )
 
 func main() {
 	mux := http.NewServeMux()
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-	mux.Handle("/api/", http.StripPrefix("/api", api.Init()))
+	users_db := db.ConnectSqlite("users.db", logger)
+
+	mux.Handle("/api/", http.StripPrefix("/api", api.Init(users_db)))
 
 	mux.Handle("/", frontend.Init())
 

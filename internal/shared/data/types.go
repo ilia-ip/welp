@@ -42,3 +42,8 @@ type Post struct {
 	Title    string
 	Content  string // will use markdown
 }
+
+type RegisterRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
