@@ -5,7 +5,8 @@ import (
 	"welp/internal/api/handlers"
 )
 
-func Register(mux *http.ServeMux) {
-
-	mux.HandleFunc("GET /api", handlers.Api)
+func Init() *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /", handlers.Api)
+	return mux
 }

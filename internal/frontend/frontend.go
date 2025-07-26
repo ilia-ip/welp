@@ -7,6 +7,8 @@ import (
 	"github.com/a-h/templ"
 )
 
-func Register(mux *http.ServeMux) {
+func Init() *http.ServeMux {
+	mux := http.NewServeMux()
 	mux.Handle("GET /", templ.Handler(pages.Home()))
+	return mux
 }

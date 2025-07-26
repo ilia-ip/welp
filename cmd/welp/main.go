@@ -12,8 +12,9 @@ func main() {
 	mux := http.NewServeMux()
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-	api.Register(mux)
-	frontend.Register(mux)
+	mux.Handle("/api/", http.StripPrefix("/api", api.Init()))
+
+	mux.Handle("/", frontend.Init())
 
 	server := http.Server{
 		Addr:    ":8080",
