@@ -10,9 +10,13 @@ type User struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 
-	ID       uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
+	ID       uuid.UUID `gorm:"type:uuid"`
 	Username string
 	Password []byte
+
+	DisplayName string
+	Description string
+	Status      string
 }
 
 type Msg struct {
@@ -20,10 +24,11 @@ type Msg struct {
 	UpdatedAt time.Time
 
 	Replied  bool
-	RepledTo uint // original message id
+	RepledTo uuid.UUID `gorm:"type:uuid"` // original message id
 
-	AuthorID uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
-	Content  string    // will use markdown
+	MessageID uuid.UUID `gorm:"type:uuid"`
+	AuthorID  uuid.UUID `gorm:"type:uuid"`
+	Content   string    // will use markdown
 }
 
 type Post struct {
@@ -32,7 +37,8 @@ type Post struct {
 
 	Tags []string `gorm:"type:text[]"`
 
-	AuthorID uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
+	PostID   uuid.UUID `gorm:"type:uuid"`
+	AuthorID uuid.UUID `gorm:"type:uuid"`
 	Title    string
 	Content  string // will use markdown
 }
