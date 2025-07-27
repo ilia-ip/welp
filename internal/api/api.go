@@ -12,12 +12,11 @@ import (
 func Init(users_db *gorm.DB) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", handlers.Api)
-	mux.HandleFunc("POST /register", handlers.Register)
+	mux.HandleFunc("POST /register", handlers.Register(users_db))
 	// mux.HandleFunc("POST /login", nil)
 
 	authed_mux := http.NewServeMux()
-	authed_mux.HandleFunc("GET /profile", nil)
+	authed_mux.HandleFunc("GET /profile", handlers.Profile(users_db))
 	// mux.HandleFunc("GET /users/{user_id}/profile", nil)
 
 	// mux.HandleFunc("GET /posts", nil)

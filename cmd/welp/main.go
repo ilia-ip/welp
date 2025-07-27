@@ -7,8 +7,6 @@ import (
 	"welp/internal/api"
 	"welp/internal/api/db"
 	"welp/internal/frontend"
-
-	"gorm.io/gorm"
 )
 
 func main() {
