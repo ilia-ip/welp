@@ -17,11 +17,13 @@ func Auth(auth_method func(string) (uuid.UUID, bool), next http.Handler) http.Ha
 
 		if !strings.HasPrefix(header, "Bearer ") {
 			shared.Error(w, "Invalid auth method", http.StatusBadRequest)
+			return
 		}
 
 		user_id, exists := auth_method(strings.TrimPrefix(header, "Bearer "))
 		if !exists {
 			shared.Error(w, "Invalid jwt token", http.StatusBadRequest)
+			return
 		}
 
 		ctx := context.WithValue(r.Context(), "user_id", user_id)

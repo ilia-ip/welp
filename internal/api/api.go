@@ -9,10 +9,10 @@ import (
 	"gorm.io/gorm"
 )
 
-func Init(users_db *gorm.DB) *http.ServeMux {
+func Init(users_db *gorm.DB) http.Handler {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("POST /register", handlers.Register(users_db))
+	mux.HandleFunc("POST /register", handlers.Register(users_db, auth.GenJWT))
 	// mux.HandleFunc("POST /login", nil)
 
 	authed_mux := http.NewServeMux()
@@ -35,5 +35,5 @@ func Init(users_db *gorm.DB) *http.ServeMux {
 
 	mux.Handle("/", middleware.Auth(auth.ParseJWT, authed_mux))
 
-	return mux
+	return middleware.Logging(mux)
 }

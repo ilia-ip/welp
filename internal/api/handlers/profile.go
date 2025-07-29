@@ -15,6 +15,7 @@ func Profile(users_db *gorm.DB) http.HandlerFunc {
 		username, ok := r.Context().Value(middleware.USER_ID_KEY).(string)
 		if !ok {
 			shared.Error(w, "Internal Error", http.StatusInternalServerError)
+			return
 		}
 
 		var user data.User
@@ -23,6 +24,7 @@ func Profile(users_db *gorm.DB) http.HandlerFunc {
 		json, err := json.Marshal(user)
 		if err != nil {
 			shared.Error(w, "Internal error", http.StatusInternalServerError)
+			return
 		}
 
 		w.Write(json)
