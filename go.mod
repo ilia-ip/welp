@@ -2,6 +2,8 @@ module welp
 
 go 1.24.5
 
+require github.com/google/uuid v1.6.0
+
 require (
 	github.com/a-h/parse v0.0.0-20250122154542-74294addb73e // indirect
 	github.com/a-h/templ v0.3.920 // indirect
