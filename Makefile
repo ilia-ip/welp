@@ -1,8 +1,6 @@
-build: templ
+build:
 	go build -o ./bin/welp ./cmd/welp
 test: 
 	go test ./cmd/welp
-run: templ
-	go run ./cmd/welp
-templ:
-	go tool templ generate ./internal/frontend/pages/
+run:
+	air --build.cmd "go build -o bin/welp cmd/welp/main.go" --build.bin "./bin/welp" --build.exclude_dir "test,tmp,bin"
