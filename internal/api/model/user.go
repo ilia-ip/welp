@@ -7,7 +7,8 @@ import (
 )
 
 type User struct {
-	Id uuid.UUID
+	Id       uuid.UUID
+	Password []byte
 
 	UserName    string
 	Description string
@@ -15,7 +16,4 @@ type User struct {
 
 	// For encrypting messages
 	Key rsa.PrivateKey
-
-	// For authorization
-	Token []byte
 }

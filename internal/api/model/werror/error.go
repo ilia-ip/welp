@@ -12,4 +12,9 @@ var (
 		Code: http.StatusBadRequest,
 		Msg:  "",
 	}
+
+	INT_ERR = Error{
+		Code: http.StatusInternalServerError,
+		Msg:  "Internal error",
+	}
 )
